@@ -8,13 +8,12 @@ using namespace std;
 ///////// Functions
 
 void clear(){ // For clearing screen
-    system("cls");
+    system("CLS");
 }
 
 int getChoice()
 
 {
-
     int choice = 0;
 
     cout<< "*******************************************************************************" <<endl
@@ -34,8 +33,8 @@ int getChoice()
     while (!cin.good())
     {
         //Print Error
-        cout << "ERROR: Invalid Input, try again...\n";
-
+        cout << "\nERROR: Invalid Input, try again...\n";
+        
         //  clear stream
         cin.clear();
         cin.ignore(INT_MAX, '\n');
@@ -94,20 +93,19 @@ int main(){
                 cout<< "Invalid input, try again...\n";
                 break;
         }
-        
-        cout<< " asdqwe " + choice + " \n ";
+        // cout<< "asdqwe" + choice;
 
-        cout << "\nPress N to exit or any key to Continue " << endl;
-        cin >> ans;
-        if (ans == 'n'|| ans == 'N'){
-            break;
-        }
-        else{
-            clear();
-            // choice= getChoice();
+        // cout << "\nPress N to exit or any key to Continue " << endl;
+        // cin >> ans;
+        // if (ans == 'n'|| ans == 'N'){
+        //     break;
+        // }
+        // else{
+        //     clear();
+        //     // choice= getChoice();
 
-        }
-        choice= getChoice();
+        // }
+        choice = getChoice();
         
     }
     

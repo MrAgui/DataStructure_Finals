@@ -2,6 +2,7 @@
 #include<vector>
 #include<iomanip> // for input output manipulation
 
+
 using namespace std;
 
 ///////// Functions
@@ -10,9 +11,12 @@ void clear(){ // For clearing screen
     system("cls");
 }
 
-int getChoice(){
+int getChoice()
+
+{
 
     int choice = 0;
+
     cout<< "*******************************************************************************" <<endl
     << "\t\t\tPARKING MANAGEMENT SYSTEM " <<endl
     << "*******************************************************************************\n" << endl
@@ -27,10 +31,10 @@ int getChoice(){
     cin>> setw(1)>> choice;
 
     // Error check 
-    while (!cin.good()){
+    while (!cin.good())
+    {
         //Print Error
         cout << "ERROR: Invalid Input, try again...\n";
-        
 
         //  clear stream
         cin.clear();
@@ -44,7 +48,6 @@ int getChoice(){
     //  clear stream
     cin.clear();
     cin.ignore(INT_MAX, '\n');
-
     return choice;
 }
 
@@ -58,48 +61,56 @@ int main(){
     
     choice = getChoice();
 
-    while   (choice > 0 ){ // menu
+    //CHOICES 
+    
+    while(choice > 0 ){ 
         switch (choice){
             case 1:
                 clear();
-                cout<< " this is 1";
+                cout<< " this is 1\n";
                 break;
             case 2:
                 clear();
-                cout<<"this is 2";               
+                cout<<"this is 2\n";               
                 break;
             case 3:
                 clear();
-                cout<<"this is 3";
+                cout<<"this is 3\n";
                 break;                
             case 4:
                 clear();
-                cout<<"this is 4";
+                cout<<"this is 4\n";
                 break;
             case 5:
                 clear();
-                cout<<"this is 5";
+                cout<<"this is 5\n";
                 break;
             case 6:
+                clear();
+                cout<<"\nEXITING PROGRAM...\n";
                 exit(0);
-                break;
             default:
                 clear();
-                cout<< " Invalid input try again";
+                cout<< "Invalid input, try again...\n";
                 break;
         }
+        
+        cout<< " asdqwe " + choice + " \n ";
 
-        cout << "\nDo you want to continue, press y/n : " << endl;
+        cout << "\nPress N to exit or any key to Continue " << endl;
         cin >> ans;
-        if (ans == 'n'){
+        if (ans == 'n'|| ans == 'N'){
             break;
         }
         else{
             clear();
-            getChoice();
-        }
-    }
+            // choice= getChoice();
 
+        }
+        choice= getChoice();
+        
+    }
+    
     system("pause");
     return 0;
 }

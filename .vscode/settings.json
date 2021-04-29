@@ -7,6 +7,9 @@
         "system_error": "cpp",
         "vector": "cpp",
         "xiosbase": "cpp",
-        "xstring": "cpp"
-    }
+        "xstring": "cpp",
+        "xlocale": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

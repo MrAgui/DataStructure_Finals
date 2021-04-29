@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+
 ///////// Functions
 
 void clear(){ // For clearing screen
@@ -28,10 +30,8 @@ int getChoice()
     << "_______________________________________________________________________________" << endl
     << "Enter choice : ";
     cin>> setw(1)>> choice;
-
     // Error check 
-    while (!cin.good())
-    {
+    while (!cin.good()){
         //Print Error
         cout << "\nERROR: Invalid Input, try again...\n";
         
@@ -39,12 +39,13 @@ int getChoice()
         cin.clear();
         cin.ignore(INT_MAX, '\n');
 
-        //Get input again..
+        // Get input again..`
         cout << "Enter Choice: ";
         cin>> setw(1)>> choice;
 
     }
     //  clear stream
+    clear();
     cin.clear();
     cin.ignore(INT_MAX, '\n');
     return choice;
@@ -90,21 +91,23 @@ int main(){
                 exit(0);
             default:
                 clear();
-                cout<< "Invalid input, try again...\n";
+                cout<< "\nERROR: Invalid input, try again...\n";
                 break;
         }
         // cout<< "asdqwe" + choice;
 
-        // cout << "\nPress N to exit or any key to Continue " << endl;
-        // cin >> ans;
-        // if (ans == 'n'|| ans == 'N'){
-        //     break;
-        // }
-        // else{
-        //     clear();
-        //     // choice= getChoice();
+        cout << "\nPress N to exit or any key to Continue " << endl;
+        cin>> setw(1)>> ans;
+        if (ans == 'n'|| ans == 'N'){
+            break;
+        }
+        else{
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            clear();
+            // choice= getChoice();
 
-        // }
+        }
         choice = getChoice();
         
     }

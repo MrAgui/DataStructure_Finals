@@ -52,16 +52,26 @@ fstream file;
 ///////// Functions
 
 
-
-
-
 void Vehicle::park(){
 
     Vehicle* v = new Vehicle;
     cout << "\nEnter Vehicle type\n"
          << "(1 for Car / 2 for Bike) : ";
     cin >> setw(1) >> v->type;
-    while (!cin.good() || v->type >= 3){
+
+    veh.at(i).type = v->type;
+
+    if (v->type == 1)
+    {
+        totalcar++;
+    }
+    else if(v->type == 2)
+    {
+        totalbike++;
+    }
+    else
+    {
+        while (!cin.good() || v->type >=3 || v->type <=0 ){
         //Print Error
         cout << "\n ERROR: Invalid Input, try again...\n";
         
@@ -75,6 +85,23 @@ void Vehicle::park(){
 
     }
 
+    }
+    cout<< v->type ;
+
+    // while (!cin.good()){
+    //     //Print Error
+    //     cout << "\n ERROR: Invalid Input, try again...\n";
+        
+    //     //  clear stream
+    //     cin.clear();
+    //     cin.ignore(INT_MAX, '\n');
+
+    //     // Get input again..`
+    //     // cout << "Enter Choice: ";
+    //     cin>> setw(1)>> v->type;
+
+    // }
+
 
     cout << "\n Plate number : ";
     cin >> v->pltnum;
@@ -87,8 +114,10 @@ void Vehicle::park(){
     cout << "\n Date in day month and year: ";
     cin >> v->dt.day >> v->dt.sym1 >> v->dt.month >> v->dt.sym2 >> v->dt.year;
 
+    // veh.at(i).type = v->type;
+
+
     veh.at(i).pltnum = v->pltnum;
-    veh.at(i).type = v->type;
     veh.at(i).arrive.hr = v->arrive.hr;
     veh.at(i).arrive.min = v->arrive.min;
     veh.at(i).arrive.sec = v->arrive.sec;
@@ -101,14 +130,14 @@ void Vehicle::park(){
     i++;
     totalvehicle++;
 
-    if (v->type == 1)
-    {
-        totalcar++;
-    }
-    else
-    {
-        totalbike++;
-    }
+    // if (v->type == 1)
+    // {
+    //     totalcar++;
+    // }
+    // else
+    // {
+    //     totalbike++;
+    // }
 
     cout << "\nVehicle added successfully" << endl;
  

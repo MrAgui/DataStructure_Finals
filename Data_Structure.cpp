@@ -92,17 +92,17 @@ void Vehicle::park(){
 
     }
 
-    cout << "\n Plate number : ";
-    cin >> setw(6) >>  v->pltnum;
-    veh.at(i).pltnum = v->pltnum;
+                                                                                                                // cout << "\n Plate number : ";
+                                                                                                                // cin >> setw(6) >>  v->pltnum;
+                                                                                                                // veh.at(i).pltnum = v->pltnum;
 
-    // cout<< v->pltnum;
+                                                                                                                // cout<< v->pltnum;
 
-    cout << "\n Arrival time in \n";//HOURS : MINUTES : SECONDS = "
+    cout << "\n Arrival time in (MILITARY TIME) \n";//HOURS : MINUTES : SECONDS = "
     cout << "\tHOURS   : ";
-    cin  >> setw(2) >> v->arrive.hr;
+    // cin  >> setw(1) >> v->arrive.hr;
 
-    while ( ((cin >> v->arrive.hr ) && (v->arrive.hr <= 24) )==false){
+    while ( ((cin >> setw(2) >> v->arrive.hr ) && (v->arrive.hr <= 24) )==false){
         cout << "--- ERROR: Invalid input, only numbers are accepted... ---\n"
                 << " Enter hours again  : ";
         cin.clear();
@@ -110,39 +110,52 @@ void Vehicle::park(){
         //cin >> v->arrive.hr;
     }
 
+    cout<< v->arrive.hr;
 
+                                                                                                                // while(v->arrive.hr == 0){
+                                                                                                                //     if(v->arrive.hr == 0){
+                                                                                                                //         cout << "\tHOURS is invalid, please enter valid hour   : ";
+                                                                                                                //         cin  >> setw(2) >> v->arrive.hr;
+                                                                                                                //     }else{
+                                                                                                                //         break;
+                                                                                                                //     }
+                                                                                                                // }
 
-    // while(v->arrive.hr == 0){
-    //     if(v->arrive.hr == 0){
-    //         cout << "\tHOURS is invalid, please enter valid hour   : ";
-    //         cin  >> setw(2) >> v->arrive.hr;
-    //     }else{
-    //         break;
-    //     }
-    // }
-
-    // while(true){
-    //     //if((cin >> v->arrive.hr) == false){
-    //     string check= "";
-    //     cout<< "value - "<< + v->arrive.hr;
-    //     cout << "\n";
-    //     check = v->arrive.hr + "";
-    //     cout<< "value str - " + check;
-    //     cout << "\n";
-    //     if(check_number(check)){
-    //         break;
-            
-    //     }else{
-    //         cout << "\tHOURS is invalid, please enter valid hour   : ";
-    //         cin  >> setw(2) >> v->arrive.hr;
-    //     }
-    // }
+                                                                                                                // while(true){
+                                                                                                                //     //if((cin >> v->arrive.hr) == false){
+                                                                                                                //     string check= "";
+                                                                                                                //     cout<< "value - "<< + v->arrive.hr;
+                                                                                                                //     cout << "\n";
+                                                                                                                //     check = v->arrive.hr + "";
+                                                                                                                //     cout<< "value str - " + check;
+                                                                                                                //     cout << "\n";
+                                                                                                                //     if(check_number(check)){
+                                                                                                                //         break;
+                                                                                                                        
+                                                                                                                //     }else{
+                                                                                                                //         cout << "\tHOURS is invalid, please enter valid hour   : ";
+                                                                                                                //         cin  >> setw(2) >> v->arrive.hr;
+                                                                                                                //     }
+                                                                                                                // }
 
     cout << "\tMINUTES : ";
-    cin  >> setw(2) >> v->arrive.min;
-
+    // cin  >> setw(2) >> v->arrive.min;
+    while ( ((cin >> setw(2) >> v->arrive.min ) && (v->arrive.min <= 59) )==false){
+        cout << "--- ERROR: Invalid input, only numbers are accepted... ---\n"
+                << " Enter hours again  : ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //cin >> v->arrive.hr;
+    }
     cout << "\tSECONDS : ";
-    cin  >> setw(2) >> v->arrive.sec;
+    // cin  >> setw(2) >> v->arrive.sec;
+    while ( ((cin >> setw(2) >> v->arrive.sec) && (v->arrive.sec <= 59) )==false){
+        cout << "--- ERROR: Invalid input, only numbers are accepted... ---\n"
+                << " Enter hours again  : ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        //cin >> v->arrive.hr;
+    }
 
     veh.at(i).arrive.hr = v->arrive.hr;
     veh.at(i).arrive.min = v->arrive.min;
@@ -150,7 +163,9 @@ void Vehicle::park(){
 
     cout << " Confirmed time of arrival ( "<< v->arrive.hr << " : "<< v->arrive.min << " : " << v->arrive.sec<< " )";
 
-
+    cout << "\n Plate number : ";
+    cin >> setw(6) >>  v->pltnum;
+    veh.at(i).pltnum = v->pltnum;
 
     // while ( ((cin >> v->arrive.hr) && (cin >> v->arrive.min) &&  (cin >> v->arrive.sec)) == false){
     //     cout << "--- ERROR: Invalid input, only numbers are accepted... ---\n"

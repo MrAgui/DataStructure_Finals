@@ -9,12 +9,10 @@ using namespace std;
 
 
 struct date{
-    
+
     int day; 
     int month;
     int year;
-    // char sym1;
-    // char sym2;
 };
 
 struct timee{
@@ -22,11 +20,10 @@ struct timee{
     int hr;
     int min;
     int sec;
-    // char col1;
-    // char col2;
 };
 
 class Vehicle{
+
     public:
 
         string pltnum;
@@ -41,9 +38,8 @@ class Vehicle{
         void printvehicle(Vehicle v);
         void show();
 		void compute();
-
-
 };
+
 ////////// DATA STRUCTURE USED 
 vector <Vehicle> veh(20);
 int static totalvehicle = 0, totalcar = 0, totalbike = 0, totalsales = 0, i = 0;
@@ -200,155 +196,74 @@ int computeTimeDifference(timee t1, timee t2){
     // cout<<"Time difference:" <<hh<<":"<<mm<<":"<<ss<<endl;
     return t3.hr;
 }
-//////////////////////////////////// back up 
-// void Vehicle::unpark(){
-
-//     string pno;
-//     int typ;
-//     timee depart;
-//     int time_diff;
-//     int charge = 0;
-
-//     cout << "\nEnter vehicle number : ";
-// 	while( 1 ){
-
-//     cin >> pno;
-
-//         for (int j = 0; j <= i; j++){
-
-//            if(veh.at(j).pltnum != pno){
-//                cout<< "Plate doesnt exist, enter again:";
-//                unpark();
-//            }
-//             else if (veh.at(j).pltnum == pno){
-//                     cout << "\n Departure time (MILITARY TIME) \n";
-
-//                     cout << "\tHOURS   : ";
-//                         while ( ((cin >> setw(2) >> depart.hr) && (depart.hr<= 24) )==false){
-
-//                             cout << "--- ERROR: Invalid input, enter again... ---\n"
-//                                     << " Enter hours again  : ";
-//                             cin.clear();
-//                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-//                         }
-
-//                     cout << "\tMINUTES : ";
-
-//                         while ( ((cin >> setw(2) >> depart.min ) && (depart.min<= 59) )==false){
-
-//                             cout << "--- ERROR: Invalid input, enter again... ---\n"
-//                                     << " Enter minutes again  : ";
-//                             cin.clear();
-//                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-//                         }
-
-//                     cout << "\tSECONDS : ";
-
-//                         while ( ((cin >> setw(2) >> depart.sec) && (depart.sec <= 59) )==false){
-
-//                             cout << "--- ERROR: Invalid input, enter again... ---\n"
-//                                     << " Enter seconds again  : ";
-//                             cin.clear();
-//                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-//                         }
-//                     veh.at(j).departure.hr = depart.hr;
-//                     veh.at(j).departure.min = depart.min;
-//                     veh.at(j).departure.sec = depart.sec;
-
-//                     time_diff = computeTimeDifference(veh.at(j).arrive, depart);
-
-//                     if (veh.at(j).type == 1){
-
-//                         totalcar--;
-
-//                         if (time_diff < 2){
-
-//                             charge = 30;
-
-//                         }
-//                         else{
-
-//                             if ((time_diff > 2) && ((time_diff < 5))){
-
-//                                 charge = 40;
-
-//                             }
-
-//                             else{
-
-//                                 charge = 50;
-//                             }
-//                         }
-
-//                     }
-//                     else
-//                     {
-//                         totalbike--;
-
-//                         if (time_diff < 2)
-//                         {
-//                             charge = 5;
-//                         }
-//                         else
-//                         {
-//                             if ((time_diff > 2) && ((time_diff < 5)))
-//                             {
-//                                 charge = 10;
-//                             }
-//                             else
-//                             {
-//                                 charge = 20;
-//                             }
-//                         }
-
-//                     }
-//                     cout<< "Duration in Parking lot : "<< time_diff ; 
-//                     cout << "\n Vehicle wtih plate number  : " << veh.at(j).pltnum << " has left the parking after paying PHP. " << charge << endl;
-//                     file.open("parkingDatabase.txt", ios::app);
-//                     if (!file)
-//                     {
-//                         cout << "Error: file could not be opened" << endl;
-//                         exit(1);
-//                     }
-
-//                     file << veh.at(j).type << "\t\t\t" << veh.at(j).pltnum << "\t\t\t" << veh.at(j).dt.day << "/" << veh.at(j).dt.month << "/" << veh.at(j).dt.year << "\t\t\t" << veh.at(j).arrive.hr << ":" << veh.at(j).arrive.min << ":" << veh.at(j).arrive.sec << "\t\t\t" << veh.at(j).departure.hr << ":" << veh.at(j).departure.min << ":" << veh.at(j).departure.sec << endl;
-//                     file.close();
-//                     veh.erase(veh.begin() + j);
-//                     i--;
-//                     totalvehicle--;
-//                     totalsales = totalsales + charge;
-//                     break;
-//                 }
-//         }    
-//     break;
-// 	}
-    
-// }
-
-///////////////////////////////////////////////////// testing
+///////////////////////////////////////////////////// DOne
 void Vehicle::unpark(){
 
+    
     string pno;
+    int ind;
     int typ;
     timee depart;
     int time_diff;
     int charge = 0;
+    bool notfound=true;
 
     cout << "\nEnter vehicle number : ";
-	while( 1 ){
+    while( notfound){
 
-    cin >> pno;
+        getline(cin, pno);        
+        cout << "\nEntered value is : ";
+        cout << pno;
+        cout << "\n";
+        for(int j = 0; j < veh.size(); j++){
 
-        for (int j = 0; j <= i; j++){
+            if(veh.at(j).pltnum != ""){
+                cout<<" plate number not found";
+                cout << "\nsaved pn: ";
+                cout << pno;
+                cout << " == " << veh.at(j).pltnum;
+                cout << "\n";
+                if(veh.at(j).pltnum == pno){
 
-           if(veh.at(j).pltnum != pno){
+
+
+
+                    veh.erase(veh.begin() + j);
+                    i--;
+
+                    notfound = false;
+                    cout << "\nvehicle number found \n";
+                    break;
+                    
+                }
+            }
+        }
+    }
+
+    cout<< ind+"\n";
+
+    cout << ind+"\n";   
+
+    // veh.erase(veh.begin() + ind);
+
+    // veh.erase(veh.begin() + ind);
+    
+
+    veh.at(i).compute();
+
+    cout << " unparked! ";
+
+
+
+	/*
+    for (int j = 0; j <= i; j++){
+        while( (cin>> pno) && veh.at(j).pltnum != pno ){
                cout<< "Plate doesnt exist, enter again:";
                cin.clear();
                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-               unpark();
-           }
-            else if (veh.at(j).pltnum == pno){
+               //unpark();
+        }
+            if (veh.at(j).pltnum == pno){
                     cout << "\n Departure time (MILITARY TIME) \n";
 
                     cout << "\tHOURS   : ";
@@ -448,10 +363,10 @@ void Vehicle::unpark(){
                     totalsales = totalsales + charge;
                     break;
                 }
-        }    
+    //     }    
     break;
 	}
-    
+    */
 }
 //////////////////////////////////////////////////////
 
@@ -523,6 +438,12 @@ int getChoice()
 ////////  Main
 
 int main(){
+ 
+    // string pno;
+    // cout << "\nEnter vehicle number : ";
+    // cin>> pno;
+    // cout << pno;
+
 
     int choice = 0;
     char ans;
@@ -561,27 +482,14 @@ int main(){
                 cout<< "\nERROR: Option not available, try again...\n";
                 break;
         }
-        // cout<< "asdqwe" + choice;
+
         system("pause");
-
-        // cout << "\nPress N to exit or any key to Continue " << endl;
-        // cin>> setw(1)>> ans;
-
-        // if (ans == 'n'|| ans == 'N'){
-        //     break;
-        // }
-        // else{
-        //     cin.clear();
-        //     cin.ignore(INT_MAX, '\n');
-        //     clear_scr();
-        //     // choice= getChoice();
-
-        // }
+        clear_scr();
 
         choice = getChoice();
         
     }
-    cout<< "Exiting Program...";
+
     system("pause");
     return 0;
 }

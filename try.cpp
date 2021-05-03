@@ -75,10 +75,10 @@ void Vehicle::park(){
     cout<< "\n  Enter Vehicle type \n"
         << "\n 1 for Car / 2 for Bike : ";
 
-        while ((cin>> setw(1)>> v->type) && !cin.good() || v->type >=3 || v->type <=0 ){
+        while ((cin >> setw(1) >> v->type) && !cin.good() || v->type >=3 || v->type <=0 ){
 
             //Prints Error
-            cout << "\n ERROR: Invalid Input, try again...\n";
+            cout << "\n--- ERROR: Invalid Input, try again... ---\n";
             
             //  clear stream
             cin.clear();
@@ -90,40 +90,40 @@ void Vehicle::park(){
     cout << "\n Arrival time (MILITARY TIME) \n";//HOURS : MINUTES : SECONDS = "
 
     cout << "\tHOURS   : ";
-        while ( ((cin >> setw(2) >> v->arrive.hr ) && (v->arrive.hr <= 24) )==false){
+    while ((cin >> setw(2) >> v->arrive.hr ) && !cin.good() || v->arrive.hr >= 24 || v->arrive.hr <=0  ){
 
-            cout << "--- ERROR: Invalid input, enter again... ---\n"
-                    << " Enter hours again  : ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "--- ERROR: Invalid input, enter again... ---\n"
+                << " Enter hours again  : ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        }
+    }
 
     cout << "\tMINUTES : ";
+    while ( (cin >> setw(2) >> v->arrive.min ) && !cin.good() || v->arrive.min >= 60 || v->arrive.min <=0 ){
 
-        while ( ((cin >> setw(2) >> v->arrive.min ) && (v->arrive.min <= 59) )==false){
+        cout << "--- ERROR: Invalid input, enter again... ---\n"
+                << " Enter minutes again  : ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
-            cout << "--- ERROR: Invalid input, enter again... ---\n"
-                    << " Enter minutes again  : ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
 
     cout << "\tSECONDS : ";
+    while ( (cin >> setw(2) >> v->arrive.sec) && !cin.good() || v->arrive.sec >= 60 || v->arrive.sec <=0){
 
-        while ( ((cin >> setw(2) >> v->arrive.sec) && (v->arrive.sec <= 59) )==false){
-
-            cout << "--- ERROR: Invalid input, enter again... ---\n"
-                    << " Enter seconds again  : ";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
+        cout << "--- ERROR: Invalid input, enter again... ---\n"
+                << " Enter seconds again  : ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
 	veh.at(i).arrive.hr = v->arrive.hr;
 	veh.at(i).arrive.min = v->arrive.min;
 	veh.at(i).arrive.sec = v->arrive.sec;
 
 	cout << "\n Confirmed time of arrival ( "<< v->arrive.hr << " : "<< v->arrive.min << " : " << v->arrive.sec<< " )";
+
 ////////////// DATE
     cout << "\n\n Date in DAY / MONTH / YEAR ";
 
@@ -149,7 +149,7 @@ void Vehicle::park(){
     
     cout<< "\tYEAR  : ";
 
-        while ( ((cin >> setw(2) >> v->dt.year  ) && true )==false){
+        while ( ((cin >> setw(2) >> v->dt.year  ) && cin.good() )==false){
 
             cout << "--- ERROR: Invalid input, enter again... ---\n"
                     << " Enter year again  : ";
@@ -297,7 +297,6 @@ void Vehicle::unpark(){
                             }
 
                             else{
-
                                 charge = 50;
                             }
                         }
@@ -587,7 +586,6 @@ int main(){
                 exit(0);
                 break;
             default:
-                clear_scr();
                 cout<< "\nERROR: Option not available, try again...\n";
                 break;
         }

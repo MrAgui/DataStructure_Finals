@@ -3,6 +3,8 @@
 #include<iomanip>  // for input output manipulation
 #include<fstream> // for storing data in files
 #include<limits>  // for checking inputss
+#include<math.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -31,6 +33,7 @@ class Vehicle{
         date dt;
         timee arrive;
         timee departure;
+        int size = 20;
 
     
         void park();
@@ -41,7 +44,7 @@ class Vehicle{
 };
 
 ////////// DATA STRUCTURE USED 
-vector <Vehicle> veh(20);
+vector <Vehicle> veh(11);
 int static totalvehicle = 0, totalcar = 0, totalbike = 0, totalsales = 0, i = 0;
 
 fstream file;
@@ -75,15 +78,37 @@ void Vehicle::park(){
     cout<< "\n  Enter Vehicle type \n"
         << "\n 1 for Car / 2 for Bike : ";
 
-        while ((cin >> setw(1) >> v->type) && !cin.good() || v->type >=3 || v->type <=0 ){
 
-            //Prints Error
-            cout << "\n--- ERROR: Invalid Input, try again... ---\n";
+
+    // while (((cin>> setw(1)>> v->type) && !cin.good()  || v->type >=3 || v->type <=0 )==true){
+    //         //Prints Error
+    //         cout << "\n ERROR: Invalid Input, Enter vehicle Type again...\n";
             
-            //  clear stream
-            cin.clear();
-            cin.ignore(INT_MAX, '\n');
-        }
+    //         //  clear stream
+    //         cin.clear();
+    //         cin.ignore(INT_MAX, '\n');
+    // }
+    // veh.at(i).type = v->type;
+        // while ((cin>> setw(1)>> v->type) && cin.good() || v->type >=3 || v->type <=0 ){
+
+        //     //Prints Erroraa
+        //     cout << "\n ERROR: Invalid Input, try again...\n";
+            
+        //     //  clear stream
+        //     cin.clear();
+        //     cin.ignore(INT_MAX, '\n');
+        // }
+        // veh.at(i).type = v->type;
+
+    while ((cin >> setw(1) >> v->type) && !cin.good() || v->type >=3 || v->type <=0 ){
+
+        //Prints Error
+        cout << "\n--- ERROR: Invalid Input, try again... ---\n";
+        
+        //  clear stream
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+    }
     veh.at(i).type = v->type;
 
 ////////////// TIME 
@@ -93,7 +118,7 @@ void Vehicle::park(){
     while ((cin >> setw(2) >> v->arrive.hr ) && !cin.good() || v->arrive.hr >= 24 || v->arrive.hr <=0  ){
 
         cout << "--- ERROR: Invalid input, enter again... ---\n"
-                << " Enter hours again  : ";
+                << " Enter hours   : ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -103,7 +128,7 @@ void Vehicle::park(){
     while ( (cin >> setw(2) >> v->arrive.min ) && !cin.good() || v->arrive.min >= 60 || v->arrive.min <=0 ){
 
         cout << "--- ERROR: Invalid input, enter again... ---\n"
-                << " Enter minutes again  : ";
+                << " Enter minutes   : ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
@@ -168,36 +193,84 @@ void Vehicle::park(){
     cin >> setw(6) >>  v->pltnum;
     cin.ignore(INT_MAX, '\n');
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    // string pno2;
+    // bool notfound_2 = true;
+
+    // while( notfound_2 ){
+    //     cout << "\nEnter vehicle number : ";
+    //     getline(cin, v->pltnum);  
+    //     cout<<v->pltnum ;
+    //     pno2=v->pltnum;
+
+    //     cout<< "\nentered valus : " << pno2<< endl;
+     
+    //     for(int i = 0; i < veh.size(); i++){
+
+    
+
+    //         if(veh.at(i).pltnum == pno2){
+    //             cout<<"Plate number Already exists"<< v->pltnum;
+    //             cout<<"try again \n";
+    //             notfound_2 == true;
+    //         }
+
+
+    //         if(notfound_2==false){
+    //             cout<< " not found" << pno2 ;
+    //             cout<< "  so continue ";
+    //             notfound_2 = false;
+    //             break;
+    //         }
+                    
+    //     }
+
+    // }
+///////////////////////////////////////////////////////////////////////////////////////
     veh.at(i).pltnum = v->pltnum;   
 
-    i++;
+    i++;    
     //totalvehicle++;
 
-
+    cout<< "List of Plates:\n";
+    for (auto& it : veh){   
+        cout << it.pltnum << "\n";
+    }	
     cout << "\n---Vehicle added successfully! ---\n" << endl;
  
 }
+
+
+
+
 
 int computeTimeDifference(timee t1, timee t2){
 
     int sec1, sec2, totalsec;
     timee t3;
-    //calculate difference
-    //get time in total seconds
+    
+    // Convert all units to seconds
     sec1 = t1.hr * 60 * 60 + t1.min * 60 + t1.sec;
     sec2 = t2.hr * 60 * 60 + t2.min * 60 + t2.sec;
 
+    // Calculate the difference by total seconds
     totalsec = sec2 - sec1;
 
     //extract time in Hours, Minutes and Seconds
     t3.min = totalsec / 60;
     t3.hr  = t3.min / 60;
-    t3.min = t3.min % 60;
-    t3.sec = totalsec % 60;
+    // t3.min = t3.min % 60;
+    // t3.sec = totalsec % 60;
 
-    // cout<<"Time difference:" <<hh<<":"<<mm<<":"<<ss<<endl;
     return t3.hr;
 }
+
+
+
+
 ///////////////////////////////////////////////////// Rechecking
 void Vehicle::unpark(){
 
@@ -215,13 +288,6 @@ void Vehicle::unpark(){
     for (auto& it : veh){   
         cout << it.pltnum << "\n";
     }	
-    // if (totalvehicle == 0){
-
-    //     cout<< " Parking lot is still empty.\n";
-    //     system("PAUSE");
-    //     getChoice();
-        
-    // }
     
     while( notfound){
         cout << "\nEnter vehicle number : ";
@@ -235,8 +301,7 @@ void Vehicle::unpark(){
             if(veh.at(j).pltnum != ""){               
 
                 // continue;
-                cout << "\nsaved pn: ";
-                cout << pno;
+                cout << "\nsaved pn: "<< pno;
                 cout << " == " << veh.at(j).pltnum;
                 cout << "\n";
 
@@ -285,40 +350,36 @@ void Vehicle::unpark(){
 
                         if ((time_diff == 0) || (time_diff < 2) && (time_diff == 1)){
 
-                            charge = 30;
+                            charge = 20;
 
                         }
                         else{
 
                             if ((time_diff > 2) && ((time_diff < 5))){
 
-                                charge = 40;
+                                charge = 30;
 
                             }
 
                             else{
-                                charge = 50;
+                                
+                                charge = 60;
                             }
                         }
 
                     }
-                    else
-                    {
+                    else{
                         totalbike--;
 
-                        if (time_diff < 2)
-                        {
-                            charge = 5;
+                        if ((time_diff == 0) || (time_diff < 2) && (time_diff == 1)){
+                            charge = 15;
                         }
-                        else
-                        {
-                            if ((time_diff > 2) && ((time_diff < 5)))
-                            {
-                                charge = 10;
+                        else{
+                            if ((time_diff > 2) && ((time_diff < 5))){
+                                charge =25;
                             }
-                            else
-                            {
-                                charge = 20;
+                            else{
+                                charge = 50;
                             }
                         }
 
@@ -326,8 +387,7 @@ void Vehicle::unpark(){
                     cout << "\n Duration in Parking lot    : " << time_diff << "hrs" ; 
                     cout << "\n Vehicle wtih plate number  : " << veh.at(j).pltnum << " are charged with PHP. " << charge << endl;
                     file.open("parkingDatabase.txt", ios::app);
-                    if (!file)
-                    {
+                    if (!file){
                         cout << "Error: file could not be opened" << endl;
                         exit(1);
                     }   
@@ -513,7 +573,7 @@ int getChoice()
     << "\t\t2. UNPARK            |" << "\tTotal number of car parked     : " << totalcar      << endl
     << "\t\t3. TOTAL SALES       |" << "\tTotal number of bike parked    : " << totalbike     << endl
     << "\t\t4. SHOW DATA         |" << endl
-    << "\t\t5. Exit SYSTEM       |" << endl
+    << "\t\t5. EXIT              |" << endl
     << "_______________________________________________________________________________" << endl
     << "Enter choice : ";
     cin>> setw(1)>> choice;
@@ -527,7 +587,7 @@ int getChoice()
         cin.ignore(INT_MAX, '\n');
 
         // Get input again..`
-        cout << "Enter Choice: ";
+        cout << " Enter Choice: ";
         cin>> setw(1)>> choice;
 
     }
@@ -554,14 +614,22 @@ int main(){
         switch (choice){
             case 1: // FOR PARKING 
                 clear_scr();
+                if (totalvehicle == 10){
+                    cout<< "\n---Parking lot is full---\n\n";
+                    system("PAUSE");
+                    clear_scr();
+                    main();
+                }else{
                 cout << "\t\t\n---PARKING VEHICLE---" << endl;
                 veh.at(i).park();
+                break;
+                }
                 break;
             case 2: //FOR UNPARKING
                 clear_scr();
                 
                 if (totalvehicle == 0){
-                    cout<< "\n---Parking lot is still empty---\n\n";
+                    cout<< "\n---Parking lot is empty---\n\n";
                     system("PAUSE");
                     clear_scr();
                     main();

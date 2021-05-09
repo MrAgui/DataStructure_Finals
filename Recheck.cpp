@@ -6,7 +6,7 @@
 #include<math.h>
 #include <algorithm>
 #include<iterator>
-
+#include<cstring> // fpr string lenght
 
 using namespace std;
 
@@ -61,7 +61,9 @@ fstream file;
 void Vehicle::park(){
 
     Vehicle* v  = new Vehicle;
-
+    void char_limit(){
+    strlen(v->pltnum)
+    }
     // cout << "\n\n Plate number : ";
     // cin >> setw(6) >>  v->pltnum;
     // cin.ignore(INT_MAX, '\n');
@@ -71,7 +73,6 @@ void Vehicle::park(){
     // cout << "\n\n Plate number : ";
     // cin >> setw(6) >> v->pltnum;
     // cin.ignore(INT_MAX, '\n');
-
 
 
 

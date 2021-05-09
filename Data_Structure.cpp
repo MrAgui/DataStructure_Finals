@@ -34,7 +34,6 @@ class Vehicle{
         timee departure;
         int size = 20;
 
-    
         void park();
         void unpark();
         void printvehicle(Vehicle v);
@@ -43,12 +42,12 @@ class Vehicle{
 };
 
 // //============== DATA STRUCTURE USED 
+
+// //============== SIZE OF VECTOR == 11
+// //============== MAC CAPACITY OF PARKING LOT == 10
+
 vector <Vehicle> veh(11);
 int static totalvehicle = 0, totalcar = 0, totalbike = 0, totalsales = 0, i = 0;
-
-fstream file;
-
-
 
 // //============= FUNCTIONS
 
@@ -69,19 +68,17 @@ void Vehicle::compute(){
     }
 }
 
-// //============= F_PARKING
+fstream file;
+// // ============= F_PARKING
 void Vehicle::park(){
 
     Vehicle* v = new Vehicle;
 
     cout<< "\n  Enter Vehicle type \n"
         << "\n 1 for Car / 2 for Bike : ";
-        
-    ////// PROBLEM IS int then string
 
     while ((cin >> setw(1) >> v->type) && !cin.good() || v->type >=3 || v->type <=0 ){
 
-        //Prints Error
         cout << "\n--- ERROR: Invalid Input, try again... ---\n";
         
         //  clear stream
@@ -90,8 +87,8 @@ void Vehicle::park(){
     }
     veh.at(i).type = v->type;
 
-    // //  F_PARKING_TIME 
-    cout << "\n Arrival time (MILITARY TIME) \n";//HOURS : MINUTES : SECONDS = "
+    // //  =============  F_PARKING_TIME  //HOURS : MINUTES : SECONDS 
+    cout << "\n Arrival time (MILITARY TIME) \n";
 
     cout << "\tHOURS   : ";
     while ((cin >> setw(2) >> v->arrive.hr ) && !cin.good() || v->arrive.hr >= 24 || v->arrive.hr <=0  ){
@@ -128,7 +125,7 @@ void Vehicle::park(){
 
 	cout << "\n Confirmed time of arrival ( "<< v->arrive.hr << " : "<< v->arrive.min << " : " << v->arrive.sec<< " )";
 
-////////////// DATE
+    // //  =============  F_PARKING_DATE
     cout << "\n\n Date in DAY / MONTH / YEAR ";
 
     cout<< "\n\tDAY   : ";
@@ -199,39 +196,27 @@ void Vehicle::park(){
             break;
         }
     }
-
-
-    // cout << "\n\n Plate number : ";
-    // cin >> setw(6) >>  v->pltnum;
-    // cin.ignore(INT_MAX, '\n');
-
-    // veh.at(i).pltnum = v->pltnum;   
-
-    // i++;    
-    // //totalvehicle++;
-
-
-    // cout << "\n---Vehicle added successfully! ---\n" << endl;
- 
 }
 
 
 
 
-
+// //  =============  F_COMPUTE_TIME_DIFFERENCE
 int computeTimeDifference(timee t1, timee t2){
 
     int Totalsec1, Totalsec2, Totalsec;
     timee t3;
     
-    // Convert all units to seconds
+    // // == Convert all units to seconds
     Totalsec1 = t1.hr * 60 * 60 + t1.min * 60 + t1.sec;
     Totalsec2 = t2.hr * 60 * 60 + t2.min * 60 + t2.sec;
 
-    // Calculate the difference by total seconds
+    
+    // // == Calculate the difference by total seconds
     Totalsec = Totalsec2 - Totalsec1;
 
-    //extract time in Hours, Minutes and Seconds
+    
+    // // == extract time in Hours, Minutes and Seconds
     t3.min = Totalsec / 60;
     t3.hr  = t3.min / 60;
 
@@ -242,7 +227,7 @@ int computeTimeDifference(timee t1, timee t2){
 
 
 
-///////////////////////////////////////////////////// Rechecking
+// //  =============  F_UNPARKING
 void Vehicle::unpark(){
 
     
@@ -267,12 +252,12 @@ void Vehicle::unpark(){
 
         for(int j = 0; j < veh.size(); j++){
 
-            if(veh.at(j).pltnum != ""){               
+            // if(veh.at(j).pltnum != ""){               
 
-                // continue;
-                cout << "\nsaved pn: "<< pno;
-                cout << " == " << veh.at(j).pltnum;
-                cout << "\n";
+            //     // continue;
+            //     // cout << "\nsaved pn: "<< pno;
+            //     // cout << " == " << veh.at(j).pltnum;
+            //     cout << "\n";
 
                 if(veh.at(j).pltnum == pno){
                     cout << "\n Departure time (MILITARY TIME) \n";
@@ -354,11 +339,12 @@ void Vehicle::unpark(){
                     }
                     cout << "\n Duration in Parking lot    : " << time_diff << "hrs" ; 
                     cout << "\n Vehicle wtih plate number  : " << veh.at(j).pltnum << " are charged with PHP. " << charge << endl;
+                    
                     file.open("parkingDatabase.txt", ios::app);
-                    if (!file){
-                        cout << "Error: file could not be opened" << endl;
-                        exit(1);
-                    }   
+                    // if (!file){
+                    //     cout << "Error: file could not be opened" << endl;
+                    //     exit(1);
+                    // }   
 
                     file << veh.at(j).type << "\t\t\t" << veh.at(j).pltnum << "\t\t\t" << veh.at(j).dt.day << "/" << veh.at(j).dt.month << "/" << veh.at(j).dt.year << "\t\t\t" << veh.at(j).arrive.hr << ":" << veh.at(j).arrive.min << ":" << veh.at(j).arrive.sec << "\t\t\t" << veh.at(j).departure.hr << ":" << veh.at(j).departure.min << ":" << veh.at(j).departure.sec << endl;
                     file.close();   
@@ -373,7 +359,7 @@ void Vehicle::unpark(){
                     
                 }
 
-            }
+            // }
 
         }
         if(notfound==true){
@@ -383,7 +369,7 @@ void Vehicle::unpark(){
 
     }
 
-    cout << " Vehicle unparked... ";
+    cout << " \n---Vehicle unparked... ---";
 
 }
 //////////////////////////////////////////////////////
@@ -504,7 +490,7 @@ int main(){
                 break;
             case 5:
                 clear_scr();
-                cout<<"\nEXITING PROGRAM...\n";
+                cout<<" \n ---- EXITING PROGRAM ... ----\n";
                 exit(0);
                 break;
             default:
